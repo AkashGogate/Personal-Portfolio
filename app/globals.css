@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #E8E7E5;
+  --surface: #DDDCDA;
+  --elevated: #D3D2CF;
+  --primary: #0f0f0f;
+  --secondary: #5a5a5a;
+  --border: #C5C4C1;
+  --mint: #52b788;
+}
+
+.dark {
+  --bg: #0e0e0e;
+  --surface: #161616;
+  --elevated: #1e1e1e;
+  --primary: #f0f0ee;
+  --secondary: #8a8a8a;
+  --border: #2a2a2a;
+  --mint: #52b788;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--bg);
+}
+
+body {
+  background: var(--bg);
+  color: var(--primary);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: 0.03em;
+}
+
+section[id] {
+  scroll-margin-top: 80px;
+}
+
+.section-label {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.84rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
+.hover-mint:hover {
+  color: var(--mint);
+}
+
+.btn-outline-primary {
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  letter-spacing: 0.05em;
+}
+.btn-outline-primary:hover {
+  background: var(--mint);
+  border-color: var(--mint);
+  color: var(--primary);
+}
+
+.btn-outline-secondary {
+  border: 1px solid var(--border);
+  color: var(--secondary);
+  letter-spacing: 0.05em;
+}
+.btn-outline-secondary:hover {
+  border-color: var(--mint);
+  color: var(--mint);
+}
+
+.project-row {
+  border-left: 2px solid transparent;
+}
+.project-row:hover {
+  border-left-color: var(--mint);
+}
+.project-row:hover .project-title {
+  color: var(--mint);
+}
