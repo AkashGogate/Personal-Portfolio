@@ -6,6 +6,7 @@ import Accomplishments from "@/components/Accomplishments";
 import FeaturedProject from "@/components/FeaturedProject";
 import Projects from "@/components/Projects";
 import Skills from "@/components/Skills";
+import Education from "@/components/Education";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
       <FeaturedProject />
       <Projects />
       <Skills />
+      <Education />
     </main>
   );
 }
