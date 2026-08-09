@@ -8,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://personalportfolio.akashgogate.com/sitemap.xml",
+    sitemap: "https://personalportfoliowebsite.akashgogate.com/sitemap.xml",
   };
 }
