@@ -15,7 +15,7 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view the site.
+Open https://portfoliowebsite.akashgogate.com to view the site.
 
 ## Scripts
 
