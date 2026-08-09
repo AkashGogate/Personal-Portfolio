@@ -5,6 +5,7 @@ import { useTheme } from "./ThemeProvider";
 
 const links = [
   { label: "Home", href: "#hero" },
+  { label: "Featured Project", href: "#featured-project" },
   { label: "About", href: "#about" },
   { label: "Experience", href: "#experience" },
   { label: "Projects", href: "#projects" },
@@ -43,7 +44,7 @@ export default function Nav() {
       style={{ background: "var(--bg)", borderBottom: "1px solid var(--border)" }}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
-        <a href="#hero" className="font-display" style={{ color: "var(--primary)", fontWeight: 600, fontSize: "1.25rem" }}>
+        <a href="#hero" className="font-display hover-mint" style={{ color: "var(--primary)", fontWeight: 600, fontSize: "1.25rem" }}>
           Akash Gogate
         </a>
 

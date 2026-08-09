@@ -14,10 +14,10 @@ export default function Home() {
     <main>
       <Nav />
       <Hero />
+      <FeaturedProject />
       <About />
       <Experience />
       <Accomplishments />
-      <FeaturedProject />
       <Projects />
       <Skills />
       <Education />

@@ -136,41 +136,22 @@ export const education: Education = {
           description: "Cellular structure, organelle function, signaling pathways, and the cell cycle.",
           useCase: "Context for interpreting cell-type annotations and spatial expression patterns in the transcriptomics work.",
         },
+        {
+          name: "Statistics for the Life Sciences",
+          proficiency: 4,
+          description: "Probability, hypothesis testing, regression, and sampling distributions, with the underlying mathematics taught alongside biological applications.",
+          useCase: "Statistical foundation for the k-fold cross-validation and p-value analysis in the miRcore cancer detection model, and for feature engineering across ML projects.",
+        },
       ],
     },
-  ],
-};
-
-export interface HighSchoolEntry {
-  school: string;
-  period: string;
-  coursework: EducationCourseGroup[];
-}
-
-export const highSchool: HighSchoolEntry = {
-  school: "South Brunswick High School",
-  period: "September 2020 — June 2024",
-  coursework: [
     {
-      area: "Computer Science",
+      area: "Software & Product Development",
       courses: [
         {
           name: "Computer Science Capstone",
           description: "Senior course surveying industry frameworks across game design, computer vision, machine learning, and web development. Included panels with working engineers, university professors, and college students.",
           proficiency: 3,
           useCase: "Earliest structured exposure to ML and applied research; sparked the trajectory into CS + Biology and the work at Inspirit AI, miRcore, and the Kendziorski Lab.",
-        },
-        {
-          name: "AP Computer Science A",
-          description: "Object-oriented programming in Java: classes, inheritance, data structures, and algorithmic problem solving at the AP level.",
-          proficiency: 4,
-          useCase: "Built the Java foundation used in the USTA Tournament Explorer Android app and early programming projects.",
-        },
-        {
-          name: "AP Computer Science Principles",
-          description: "Broad survey of computing concepts: algorithms, data, the internet, and the societal impact of technology.",
-          proficiency: 3,
-          useCase: "Introduced computational thinking and problem decomposition before diving into language-specific CS work.",
         },
         {
           name: "Android Application Development",
@@ -195,23 +176,6 @@ export const highSchool: HighSchoolEntry = {
           description: "Full-stack fundamentals: HTML, CSS, JavaScript, and introductory frameworks for building interactive, data-driven web applications.",
           proficiency: 3,
           useCase: "Groundwork for the SAT Generator React.js frontend, FastAPI backend, and this portfolio site.",
-        },
-      ],
-    },
-    {
-      area: "Mathematics & Science",
-      courses: [
-        {
-          name: "AP Statistics",
-          description: "Probability, hypothesis testing, regression, sampling distributions, and statistical inference at the AP level.",
-          proficiency: 4,
-          useCase: "Statistical foundation for the k-fold cross-validation and p-value analysis in the miRcore cancer detection model, and for feature engineering in ML projects.",
-        },
-        {
-          name: "AP Biology",
-          description: "Molecular biology, genetics, evolution, ecology, and cellular processes at the AP level.",
-          proficiency: 3,
-          useCase: "Early biological context for the genomics and microRNA work at Kendziorski and miRcore, and motivation for pursuing the CS + Biology double major.",
         },
       ],
     },
@@ -265,10 +229,10 @@ export const experienceSections: ExperienceSection[] = [
         role: "Software Engineer Intern",
         period: "May 2025 — Present",
         bullets: [
-          "Applied system design principles to optimize multi-objective satellite scheduling via memoization and dynamic programming in Python, then rewrote the engine in Rust for the team's production microservice ecosystem to meet strict reliability and latency requirements.",
-          "Designed a scalable Kafka event-driven data pipeline persisting to MongoDB with at-least-once delivery and full system decoupling for mission-critical satellite operations.",
-          "Containerized a Docker test suite on Kubernetes via GitHub Actions CI/CD, writing pytest coverage across boundary conditions and fault injection to catch regressions before production.",
-          "Built a Claude Code MCP plugin from scratch on top of an institutional knowledge graph mapping team ontologies and service dependencies, serving 30 engineers across a multi-team defense program.",
+          "Leidos' satellite fleet needed to schedule competing observation requests against a shared set of ground assets — a classic multi-objective optimization problem. I applied dynamic programming and memoization in Python to prototype a scheduling engine, then rewrote the entire engine in Rust once the approach proved out, since the team's production microservice ecosystem demanded stricter reliability and lower latency than a Python service could guarantee at scale.",
+          "To keep scheduling decoupled from the rest of the satellite operations stack, I designed an event-driven data pipeline on Kafka with at-least-once delivery semantics, persisting results to MongoDB. That decoupling meant any one service could fail or redeploy without taking down the mission-critical scheduling path around it.",
+          "I containerized the team's test suite with Docker and ran it on Kubernetes, wiring the whole thing into GitHub Actions CI/CD. Writing pytest coverage across boundary conditions and deliberate fault injection meant regressions got caught in CI before they ever reached production.",
+          "Separately, I built a Claude Code MCP plugin from scratch on top of an institutional knowledge graph mapping the team's ontologies and service dependencies. It now serves roughly 30 engineers across a multi-team defense program, giving them a shared, queryable map of how services relate instead of relying on tribal knowledge.",
         ],
         tags: ["Python", "Kafka", "Kubernetes", "Docker", "MongoDB", "Dynamic Programming", "GitHub Actions", "CI/CD", "Rust", "Neo4j"],
         imageSrc: "/images/experience/leidos.jpg",
@@ -284,9 +248,9 @@ export const experienceSections: ExperienceSection[] = [
         role: "Student Research Intern",
         period: "September 2025 — Present",
         bullets: [
-          "Built end-to-end ML pipeline for single-cell RNA sequencing (scRNA-seq), next-generation sequencing (NGS), and spatial transcriptomics using PyTorch/TensorFlow deep learning; agentic framework selects and evaluates models across scVI/scANVI/scGen/AmortizedLDA for scalable production genomics, cutting GPU runtime from 80 to 27 minutes (300% reduction) on identical hardware; tracked via Weights & Biases.",
-          "Built TransferAgent, automating natural language processing (NLP) literature synthesis and cross-paper validity scoring across ~500 clinical genomics papers; cut review time by ~60%; collaborated with clinicians on clinical genomics impact.",
-          "Co-authored an ongoing clinical genomics publication targeting a peer-reviewed computational biology journal, validating model performance and pipeline reproducibility for glioblastoma gene therapy research across a 10-person interdisciplinary lab.",
+          "The lab's spatial transcriptomics work spans single-cell RNA sequencing (scRNA-seq), next-generation sequencing (NGS), and spatial transcriptomics data, each of which suits different model architectures. I built an end-to-end ML pipeline in PyTorch and TensorFlow with an agentic layer that automatically selects and evaluates the right model — scVI, scANVI, scGen, or AmortizedLDA — for a given dataset, with every run tracked in Weights & Biases. Tuning that pipeline for scale cut GPU runtime from 80 minutes down to 27 on identical hardware, a roughly 300% reduction that matters when the lab is iterating across dozens of datasets.",
+          "Keeping up with clinical genomics literature was its own bottleneck, so I built TransferAgent to automate NLP-based literature synthesis and cross-paper validity scoring across roughly 500 clinical genomics papers. It cut review time by about 60%, and I worked directly with clinicians in the lab to make sure the synthesis reflected clinical relevance, not just statistical significance.",
+          "That pipeline work is now feeding into an ongoing clinical genomics publication targeting a peer-reviewed computational biology journal, where I've been validating model performance and pipeline reproducibility for glioblastoma gene therapy research across a 10-person interdisciplinary lab.",
         ],
         tags: ["Python", "R", "LLM APIs", "Scanpy", "Seurat", "CARD", "scRNA-seq", "scVI", "scANVI", "Weights & Biases", "GitHub Actions"],
         imageSrc: "/images/experience/kendziorski.jpg",
@@ -296,8 +260,8 @@ export const experienceSections: ExperienceSection[] = [
         role: "Machine Learning Research Intern",
         period: "Sep 2022 — Mar 2023",
         bullets: [
-          "Built skin cancer detection pipeline (OpenCV + scikit-learn, NumPy/Pandas) achieving 95% classification accuracy on ~70,000 dermoscopic images; published as first author on 'Early Skin Cancer Detection Improvement' through Inspirit AI.",
-          "Trained and validated Random Forest classifier on miRNA sequences achieving 95% predictive accuracy (p < 0.05); validated via stratified k-fold cross-validation for cancer cell likelihood prediction.",
+          "I built a skin cancer detection pipeline using OpenCV for image preprocessing and scikit-learn (with NumPy/Pandas handling the data wrangling) that reached 95% classification accuracy across roughly 70,000 dermoscopic images. That work became my first published paper, 'Early Skin Cancer Detection Improvement,' through Inspirit AI.",
+          "In parallel, I trained and validated a Random Forest classifier on miRNA sequences for cancer cell likelihood prediction, reaching 95% predictive accuracy at p < 0.05, validated with stratified k-fold cross-validation to make sure the result generalized rather than overfitting to one split of the data.",
         ],
         tags: ["Python", "scikit-learn", "OpenCV", "Decision Tree", "KNN", "ML Research"],
         imageSrc: "/images/experience/inspirit.jpg",
@@ -313,8 +277,8 @@ export const experienceSections: ExperienceSection[] = [
         role: "Tennis Coach & Tournament Director",
         period: "May 2024 — Aug 2024",
         bullets: [
-          "Directed 8 regional tournaments (380+ match entries, 100% on-time initialization) while coaching 3 classes of 8-10 athletes ages 8-65, in a dual tournament director and head coach role.",
-          "Guided 3 junior athletes to 150+ regional ranking points and 5 adults up a full 0.5 NTRP competitive level through data-driven, skill-adapted coaching regimens.",
+          "I held a dual role as tournament director and head coach at Princeton Racket Club: directing 8 regional tournaments end to end — 380+ match entries, every one starting on time — while also coaching 3 classes of 8-10 athletes spanning ages 8 to 65.",
+          "On the coaching side, I built data-driven, skill-adapted regimens for individual athletes rather than running one generic program for everyone. That approach guided 3 junior athletes to over 150 regional ranking points combined and helped 5 adult players climb a full 0.5 NTRP competitive level.",
         ],
         tags: ["Leadership", "Communication", "Event Management"],
         imageSrc: "/images/experience/princeton.jpg",
@@ -324,8 +288,8 @@ export const experienceSections: ExperienceSection[] = [
         role: "Founder",
         period: "Jan 2019 — Present",
         bullets: [
-          "Founded and scaled an independent racket stringing business to 45+ clients, servicing 12-20 rackets monthly with a premium 2-day turnaround tier alongside the standard 3-4 day SLA.",
-          "Grew the client base through multi-channel grassroots marketing: word-of-mouth referrals, flyers at local parks, high school team referral discounts, and an Instagram page of stringing craftsmanship.",
+          "I founded an independent racket stringing business from scratch and scaled it to 45+ regular clients, servicing 12-20 rackets a month across two service tiers: a standard 3-4 day turnaround and a premium 2-day option for players who needed their racket back fast.",
+          "Growing the client base meant leaning on grassroots channels rather than paid marketing — word-of-mouth referrals, flyers at local parks, referral discounts through high school tennis teams, and an Instagram page showcasing the stringing craftsmanship itself.",
         ],
         tags: ["Entrepreneurship", "Operations", "Client Relations", "Inventory Management"],
         imageSrc: "/images/experience/stringing.jpg",

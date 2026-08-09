@@ -4,8 +4,8 @@
 
 :root {
   --bg: #E8E7E5;
-  --surface: #DDDCDA;
-  --elevated: #D3D2CF;
+  --surface: var(--bg);
+  --elevated: var(--bg);
   --primary: #0f0f0f;
   --secondary: #5a5a5a;
   --border: #C5C4C1;
@@ -14,8 +14,8 @@
 
 .dark {
   --bg: #0e0e0e;
-  --surface: #161616;
-  --elevated: #1e1e1e;
+  --surface: var(--bg);
+  --elevated: var(--bg);
   --primary: #f0f0ee;
   --secondary: #8a8a8a;
   --border: #2a2a2a;
@@ -27,6 +27,7 @@
 }
 
 html {
+  scroll-behavior: smooth;
   background: var(--bg);
 }
 
@@ -39,7 +40,8 @@ body {
   letter-spacing: 0.03em;
 }
 
-section[id] {
+section[id],
+[id^="skill-"] {
   scroll-margin-top: 80px;
 }
 
@@ -52,6 +54,9 @@ section[id] {
   color: var(--secondary);
 }
 
+.hover-mint {
+  transition: color 0.2s ease;
+}
 .hover-mint:hover {
   color: var(--mint);
 }
@@ -60,6 +65,7 @@ section[id] {
   border: 1px solid var(--primary);
   color: var(--primary);
   letter-spacing: 0.05em;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 .btn-outline-primary:hover {
   background: var(--mint);
@@ -71,6 +77,7 @@ section[id] {
   border: 1px solid var(--border);
   color: var(--secondary);
   letter-spacing: 0.05em;
+  transition: border-color 0.2s ease, color 0.2s ease;
 }
 .btn-outline-secondary:hover {
   border-color: var(--mint);
@@ -79,10 +86,38 @@ section[id] {
 
 .project-row {
   border-left: 2px solid transparent;
+  cursor: pointer;
+  transition: border-left-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 .project-row:hover {
   border-left-color: var(--mint);
+  transform: scale(1.015);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+.project-row .project-title {
+  transition: color 0.2s ease;
 }
 .project-row:hover .project-title {
   color: var(--mint);
+}
+
+.hover-card {
+  border-left: 2px solid transparent;
+  transition: border-left-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.hover-card:hover {
+  border-left-color: var(--mint);
+  transform: scale(1.015);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+.project-drawer-overlay {
+  transition: opacity 0.25s ease;
+}
+.project-drawer {
+  transition: transform 0.35s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.theme-curtain {
+  transition: transform 0.55s cubic-bezier(0.76, 0, 0.24, 1);
 }

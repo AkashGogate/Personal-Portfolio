@@ -12,7 +12,7 @@ export default function About() {
     <section id="about" style={{ background: "var(--bg)", paddingTop: "clamp(3rem, 6vh, 6rem)", paddingBottom: "clamp(3rem, 6vh, 6rem)" }}>
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-12">
-          <SectionLabel number="01" label="About" className="mb-4" />
+          <SectionLabel number="02" label="About" className="mb-4" />
           <h2 className="font-display" style={{ fontSize: "clamp(2.1rem, 3.5vw, 3.2rem)", fontWeight: 400, color: "var(--primary)" }}>
             Hi, I&apos;m Akash.
           </h2>
@@ -22,11 +22,11 @@ export default function About() {
           <div className="hidden md:block flex-shrink-0 w-px self-stretch" style={{ background: "var(--border)" }} />
           <div className="flex-1 space-y-8">
             {bio.map((text, i) => (
-              <p key={i} className="font-body" style={{ fontSize: "1rem", color: "var(--secondary)", lineHeight: 1.8 }}>
+              <p key={i} className="font-body" style={{ fontSize: "1.3rem", color: "var(--secondary)", lineHeight: 1.8 }}>
                 {text}
               </p>
             ))}
-            <p className="font-body" style={{ fontSize: "1.1rem", color: "var(--secondary)", letterSpacing: "0.02em" }}>
+            <p className="font-body" style={{ fontSize: "1.3rem", color: "var(--secondary)", letterSpacing: "0.02em" }}>
               3.9 GPA · Dean&apos;s List · CS + Biology, UW-Madison · Graduating May 2028 ·{" "}
               <span style={{ color: "var(--primary)", fontWeight: 500 }}>Open to Summer 2027 internships & co-ops</span>
             </p>

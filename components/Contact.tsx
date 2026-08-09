@@ -16,7 +16,7 @@ export default function Contact() {
         <h2 className="font-display mb-6" style={{ fontSize: "clamp(2.1rem, 3.5vw, 3.2rem)", fontWeight: 400, color: "var(--primary)" }}>
           Get in touch
         </h2>
-        <p className="font-body mb-8 max-w-xl" style={{ fontSize: "1rem", color: "var(--secondary)", lineHeight: 1.8 }}>
+        <p className="font-body mb-8 max-w-xl" style={{ fontSize: "1.12rem", color: "var(--secondary)", lineHeight: 1.8 }}>
           Open to Summer 2027 internships and co-ops in software engineering, AI/ML, data science, biotech, and
           computational biology research. Available May 15 – Sep 1. Email is the best way to reach me.
         </p>
@@ -30,7 +30,7 @@ export default function Contact() {
                 target={l.href.startsWith("http") ? "_blank" : undefined}
                 rel={l.href.startsWith("http") ? "noopener noreferrer" : undefined}
                 className="font-body hover-mint"
-                style={{ fontSize: "1.1rem", color: "var(--primary)", textDecoration: "underline", textDecorationColor: "var(--border)" }}
+                style={{ fontSize: "1.2rem", color: "var(--primary)", textDecoration: "underline", textDecorationColor: "var(--border)" }}
               >
                 {l.value}
               </a>

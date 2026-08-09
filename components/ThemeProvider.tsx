@@ -1,8 +1,9 @@
 "use client";
 
-import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 
 type Theme = "light" | "dark";
+type Phase = "idle" | "falling" | "rising";
 interface ThemeCtx {
   theme: Theme;
   toggle: () => void;
@@ -10,8 +11,13 @@ interface ThemeCtx {
 
 const Ctx = createContext<ThemeCtx>({ theme: "dark", toggle: () => {} });
 
+const BG: Record<Theme, string> = { light: "#E8E7E5", dark: "#0e0e0e" };
+const DURATION = 550;
+
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>("dark");
+  const [phase, setPhase] = useState<Phase>("idle");
+  const curtainColor = useRef("");
 
   useEffect(() => {
     const saved = localStorage.getItem("theme") as Theme | null;
@@ -21,17 +27,40 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const toggle = useCallback(() => {
-    setTheme((prev) => {
-      const next: Theme = prev === "dark" ? "light" : "dark";
+    if (phase !== "idle") return;
+    const next: Theme = theme === "dark" ? "light" : "dark";
+    curtainColor.current = BG[next];
+    setPhase("falling");
+    setTimeout(() => {
+      setTheme(next);
       localStorage.setItem("theme", next);
       document.documentElement.classList.toggle("dark", next === "dark");
-      return next;
-    });
-  }, []);
+      setPhase("rising");
+      setTimeout(() => setPhase("idle"), DURATION + 60);
+    }, DURATION);
+  }, [phase, theme]);
 
   const ctx = useMemo(() => ({ theme, toggle }), [theme, toggle]);
 
-  return <Ctx.Provider value={ctx}>{children}</Ctx.Provider>;
+  return (
+    <Ctx.Provider value={ctx}>
+      <div
+        aria-hidden="true"
+        className="theme-curtain"
+        style={{
+          position: "fixed",
+          inset: 0,
+          background: curtainColor.current,
+          transformOrigin: "top",
+          transform: phase === "falling" ? "scaleY(1)" : "scaleY(0)",
+          transitionProperty: phase !== "idle" ? "transform" : "none",
+          zIndex: 9997,
+          pointerEvents: "none",
+        }}
+      />
+      {children}
+    </Ctx.Provider>
+  );
 }
 
 export const useTheme = () => useContext(Ctx);

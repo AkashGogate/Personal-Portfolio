@@ -1,5 +1,6 @@
 import SectionLabel from "./SectionLabel";
 import { skillGroups } from "@/data/resume";
+import { skillSlug } from "@/lib/skills";
 
 export default function Skills() {
   return (
@@ -21,11 +22,11 @@ export default function Skills() {
               </p>
               <div className="flex flex-col gap-3">
                 {group.skills.map((skill) => (
-                  <div key={skill.name}>
-                    <span className="font-body" style={{ fontSize: "1.02rem", color: "var(--primary)", fontWeight: 500 }}>
+                  <div key={skill.name} id={skillSlug(skill.name)}>
+                    <span className="font-body" style={{ fontSize: "1.12rem", color: "var(--primary)", fontWeight: 500 }}>
                       {skill.name}
                     </span>
-                    <span className="font-body" style={{ fontSize: "0.9rem", color: "var(--secondary)" }}>
+                    <span className="font-body" style={{ fontSize: "1rem", color: "var(--secondary)" }}>
                       {" — "}{skill.description}
                     </span>
                   </div>

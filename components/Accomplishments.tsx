@@ -7,16 +7,16 @@ const BASE = process.env.NEXT_PUBLIC_BASEPATH ?? "";
 export default function Accomplishments() {
   return (
     <section id="accomplishments" style={{ background: "var(--surface)", paddingBottom: "clamp(3rem, 6vh, 6rem)" }}>
-      <div className="max-w-4xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6">
         <div className="mb-8">
-          <SectionLabel number="03" label="Accomplishments" className="mb-4" />
+          <SectionLabel number="04" label="Accomplishments" className="mb-4" />
           <h2 className="font-display" style={{ fontSize: "clamp(1.6rem, 3vw, 2.2rem)", fontWeight: 400, color: "var(--primary)" }}>
             Recognition along the way.
           </h2>
         </div>
 
         {accomplishments.map((item) => (
-          <div key={item.title} style={{ border: "1px solid var(--border)", background: "var(--bg)" }}>
+          <div key={item.title} className="hover-card" style={{ borderTop: "1px solid var(--border)", borderRight: "1px solid var(--border)", borderBottom: "1px solid var(--border)", background: "var(--bg)" }}>
             {item.imageSrc && (
               <div style={{ position: "relative", width: "100%", aspectRatio: "16 / 9" }}>
                 <Image src={`${BASE}${item.imageSrc}`} alt={item.title} fill style={{ objectFit: "cover" }} />
@@ -36,7 +36,7 @@ export default function Accomplishments() {
               <p className="font-body" style={{ fontSize: "0.85rem", color: "var(--secondary)", marginBottom: "1rem" }}>{item.organization}</p>
               <div className="flex flex-col gap-2 mb-4">
                 {item.bullets.map((b, i) => (
-                  <p key={i} className="font-body" style={{ fontSize: "0.95rem", color: "var(--secondary)", lineHeight: 1.7 }}>{b}</p>
+                  <p key={i} className="font-body" style={{ fontSize: "1.05rem", color: "var(--secondary)", lineHeight: 1.7 }}>{b}</p>
                 ))}
               </div>
               {item.tags && item.tags.length > 0 && (

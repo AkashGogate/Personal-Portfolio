@@ -1,10 +1,17 @@
+import HeroCanvas from "./HeroCanvas";
+
 const BASE = process.env.NEXT_PUBLIC_BASEPATH ?? "";
 const LABEL = "Software Engineer · Researcher · AI / ML · Data";
 
 export default function Hero() {
   return (
-    <section id="hero" className="min-h-screen flex items-center" style={{ background: "var(--surface)", paddingTop: "3.5rem" }}>
-      <div className="max-w-7xl mx-auto px-6 w-full" style={{ paddingTop: "clamp(1.5rem, 4vh, 5rem)", paddingBottom: "clamp(1.5rem, 4vh, 5rem)" }}>
+    <section
+      id="hero"
+      className="min-h-screen flex items-center relative overflow-hidden"
+      style={{ background: "var(--surface)", paddingTop: "3.5rem" }}
+    >
+      <HeroCanvas />
+      <div className="max-w-7xl mx-auto px-6 w-full relative" style={{ paddingTop: "clamp(1.5rem, 4vh, 5rem)", paddingBottom: "clamp(1.5rem, 4vh, 5rem)" }}>
         <p className="font-display" style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", fontWeight: 500, color: "var(--primary)", marginBottom: "0.75rem" }}>
           Akash Gogate
         </p>
