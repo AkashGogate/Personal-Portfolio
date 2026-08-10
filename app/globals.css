@@ -149,6 +149,14 @@ section[id],
 .nav-border {
   transition: opacity 0.2s ease-out;
 }
+.nav-link {
+  color: var(--secondary);
+  transition: color 0.2s ease;
+}
+.nav-link:hover,
+.nav-link[aria-current="page"] {
+  color: var(--mint);
+}
 .nav-underline {
   width: 0%;
   transition: width 0.3s ease;

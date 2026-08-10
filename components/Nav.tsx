@@ -46,6 +46,8 @@ export default function Nav() {
   const borderRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLElement>(null);
   const pastRef = useRef(false);
+  const navigatingRef = useRef(false);
+  const navTimeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
     const onScroll = () => {
@@ -70,6 +72,8 @@ export default function Nav() {
         progressRef.current.style.width = `${(window.scrollY / total) * 100}%`;
       }
 
+      if (navigatingRef.current) return;
+
       let current = links[0].href;
       let bestTop = -Infinity;
       for (const l of links) {
@@ -83,9 +87,20 @@ export default function Nav() {
       }
       setActive((prev) => (prev === current ? prev : current));
     };
+    const onScrollEnd = () => {
+      navigatingRef.current = false;
+      if (navTimeoutRef.current) {
+        window.clearTimeout(navTimeoutRef.current);
+        navTimeoutRef.current = null;
+      }
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("scrollend", onScrollEnd);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("scrollend", onScrollEnd);
+    };
   }, []);
 
   useEffect(() => {
@@ -94,9 +109,19 @@ export default function Nav() {
     headerRef.current.style.background = dark ? "rgba(14,14,14,0.88)" : "rgba(232,231,229,0.88)";
   }, [theme]);
 
+  const navigateTo = (id: string) => {
+    navigatingRef.current = true;
+    setActive(id);
+    if (navTimeoutRef.current) window.clearTimeout(navTimeoutRef.current);
+    navTimeoutRef.current = window.setTimeout(() => {
+      navigatingRef.current = false;
+    }, 1000);
+    scrollToSection(id);
+  };
+
   const go = (id: string) => (e: React.MouseEvent) => {
     e.preventDefault();
-    scrollToSection(id);
+    navigateTo(id);
     setOpen(false);
   };
 
@@ -121,13 +146,11 @@ export default function Nav() {
               href={`#${l.href}`}
               onClick={go(l.href)}
               aria-current={active === l.href ? "page" : undefined}
-              className="font-body hover-mint nav-link relative group"
+              className="font-body nav-link relative group"
               style={{
                 fontSize: "0.72rem",
                 letterSpacing: "0.07em",
                 textTransform: "uppercase",
-                color: active === l.href ? "var(--mint)" : "var(--secondary)",
-                borderBottom: active === l.href ? "1px solid var(--mint)" : "1px solid transparent",
                 paddingBottom: "2px",
               }}
             >
@@ -216,7 +239,7 @@ export default function Nav() {
 
     <button
       type="button"
-      onClick={() => scrollToSection("hero")}
+      onClick={() => navigateTo("hero")}
       aria-label="Back to top"
       className={`back-to-top font-body hidden md:flex ${showFab ? "visible" : ""}`}
       style={{
