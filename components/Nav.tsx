@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTheme } from "./ThemeProvider";
 import { scrollToSection } from "@/lib/scrollToSection";
 
@@ -40,10 +40,36 @@ function ThemeIcon({ theme }: { theme: "light" | "dark" }) {
 export default function Nav() {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("hero");
+  const [showFab, setShowFab] = useState(false);
   const { theme, toggle } = useTheme();
+  const progressRef = useRef<HTMLDivElement>(null);
+  const borderRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
+  const pastRef = useRef(false);
 
   useEffect(() => {
     const onScroll = () => {
+      setShowFab(window.scrollY > window.innerHeight * 0.6);
+
+      const past = window.scrollY > 50;
+      if (past !== pastRef.current) {
+        pastRef.current = past;
+        if (borderRef.current) borderRef.current.style.opacity = past ? "1" : "0";
+        if (headerRef.current) {
+          const dark = document.documentElement.classList.contains("dark");
+          headerRef.current.style.background = past
+            ? dark ? "rgba(14,14,14,0.88)" : "rgba(232,231,229,0.88)"
+            : "var(--bg)";
+          headerRef.current.style.backdropFilter = past ? "blur(12px)" : "none";
+          (headerRef.current.style as CSSStyleDeclaration & { webkitBackdropFilter: string }).webkitBackdropFilter = past ? "blur(12px)" : "none";
+        }
+      }
+
+      if (progressRef.current) {
+        const total = Math.max(document.body.scrollHeight - window.innerHeight, 1);
+        progressRef.current.style.width = `${(window.scrollY / total) * 100}%`;
+      }
+
       let current = links[0].href;
       for (const l of links) {
         const el = document.getElementById(l.href);
@@ -56,6 +82,12 @@ export default function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    if (!headerRef.current || window.scrollY <= 50) return;
+    const dark = document.documentElement.classList.contains("dark");
+    headerRef.current.style.background = dark ? "rgba(14,14,14,0.88)" : "rgba(232,231,229,0.88)";
+  }, [theme]);
+
   const go = (id: string) => (e: React.MouseEvent) => {
     e.preventDefault();
     scrollToSection(id);
@@ -63,10 +95,14 @@ export default function Nav() {
   };
 
   return (
+    <>
     <header
-      className="fixed top-0 left-0 right-0 z-50"
-      style={{ background: "var(--bg)", borderBottom: "1px solid var(--border)" }}
+      ref={headerRef}
+      className="nav-header fixed top-0 left-0 right-0 z-50"
+      style={{ background: "var(--bg)" }}
     >
+      <div ref={progressRef} style={{ position: "absolute", top: 0, left: 0, height: "1px", background: "var(--mint)", width: "0%", zIndex: 10 }} />
+      <div ref={borderRef} className="nav-border" style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "1px", background: "var(--border)", opacity: 0 }} />
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
         <a href="#hero" onClick={go("hero")} className="font-display hover-mint" style={{ color: "var(--primary)", fontWeight: 600, fontSize: "1.25rem" }}>
           Akash Gogate
@@ -79,7 +115,7 @@ export default function Nav() {
               href={`#${l.href}`}
               onClick={go(l.href)}
               aria-current={active === l.href ? "page" : undefined}
-              className="font-body hover-mint"
+              className="font-body hover-mint nav-link relative group"
               style={{
                 fontSize: "0.72rem",
                 letterSpacing: "0.07em",
@@ -90,6 +126,10 @@ export default function Nav() {
               }}
             >
               {l.label}
+              <span
+                className="nav-underline absolute -bottom-0.5 left-0 h-px"
+                style={{ width: active === l.href ? "100%" : "0%", background: "var(--mint)" }}
+              />
             </a>
           ))}
           <a
@@ -167,5 +207,34 @@ export default function Nav() {
         </div>
       )}
     </header>
+
+    <button
+      type="button"
+      onClick={() => scrollToSection("hero")}
+      aria-label="Back to top"
+      className={`back-to-top font-body hidden md:flex ${showFab ? "visible" : ""}`}
+      style={{
+        position: "fixed",
+        bottom: "2rem",
+        right: "2rem",
+        zIndex: 60,
+        background: "var(--elevated)",
+        border: "1px solid var(--border)",
+        color: "var(--secondary)",
+        cursor: "pointer",
+        alignItems: "center",
+        gap: "0.4rem",
+        padding: "0.55rem 1rem",
+        fontSize: "0.65rem",
+        letterSpacing: "0.1em",
+        textTransform: "uppercase",
+      }}
+    >
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+        <path d="M5 8V2M2 5l3-3 3 3" />
+      </svg>
+      Top
+    </button>
+    </>
   );
 }
