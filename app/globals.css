@@ -150,9 +150,11 @@ section[id],
   transition: opacity 0.2s ease-out;
 }
 .nav-underline {
+  width: 0%;
   transition: width 0.3s ease;
 }
-.nav-link:hover .nav-underline {
+.nav-link:hover .nav-underline,
+.nav-link[aria-current="page"] .nav-underline {
   width: 100%;
 }
 .back-to-top {

@@ -71,9 +71,15 @@ export default function Nav() {
       }
 
       let current = links[0].href;
+      let bestTop = -Infinity;
       for (const l of links) {
         const el = document.getElementById(l.href);
-        if (el && el.getBoundingClientRect().top <= 120) current = l.href;
+        if (!el) continue;
+        const top = el.getBoundingClientRect().top;
+        if (top <= 120 && top > bestTop) {
+          bestTop = top;
+          current = l.href;
+        }
       }
       setActive((prev) => (prev === current ? prev : current));
     };
@@ -128,7 +134,7 @@ export default function Nav() {
               {l.label}
               <span
                 className="nav-underline absolute -bottom-0.5 left-0 h-px"
-                style={{ width: active === l.href ? "100%" : "0%", background: "var(--mint)" }}
+                style={{ background: "var(--mint)" }}
               />
             </a>
           ))}

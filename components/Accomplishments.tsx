@@ -22,17 +22,17 @@ function AccomplishmentCard({ item }: { item: Accomplishment }) {
           <div
             style={{
               position: "relative",
-              width: "clamp(220px, 40%, 380px)",
+              width: "clamp(280px, 46%, 480px)",
               flex: "0 0 auto",
               aspectRatio: "4 / 3",
               alignSelf: "flex-start",
             }}
           >
-            <Image src={`${BASE}${item.imageSrc}`} alt={item.title} fill sizes="(max-width: 640px) 220px, 380px" style={{ objectFit: "cover" }} />
+            <Image src={`${BASE}${item.imageSrc}`} alt={item.title} fill sizes="(max-width: 640px) 280px, 480px" style={{ objectFit: "cover" }} />
           </div>
         )}
         <div ref={fadeRef} className={`scroll-fade ${isVisible ? "visible" : ""} flex-1`} style={{ minWidth: "260px" }}>
-          <div className="flex items-center justify-between gap-4 mb-4">
+          <div className="flex items-center justify-between gap-4 mb-5">
             <span
               className="font-body"
               style={{ fontSize: "0.7rem", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "#0f0f0f", background: "var(--mint)", padding: "4px 10px" }}
@@ -41,11 +41,11 @@ function AccomplishmentCard({ item }: { item: Accomplishment }) {
             </span>
             <span className="font-body" style={{ fontSize: "0.8rem", color: "var(--secondary)" }}>{item.period}</span>
           </div>
-          <h3 className="font-display" style={{ fontSize: "1.4rem", fontWeight: 400, color: "var(--primary)" }}>{item.title}</h3>
-          <p className="font-body" style={{ fontSize: "0.85rem", color: "var(--secondary)", marginBottom: "1rem" }}>{item.organization}</p>
-          <div className="flex flex-col gap-2 mb-4">
+          <h3 className="font-display" style={{ fontSize: "1.6rem", fontWeight: 400, color: "var(--primary)" }}>{item.title}</h3>
+          <p className="font-body" style={{ fontSize: "0.9rem", color: "var(--secondary)", marginBottom: "1.25rem" }}>{item.organization}</p>
+          <div className="flex flex-col gap-3 mb-5">
             {item.bullets.map((b) => (
-              <p key={b} className="font-body" style={{ fontSize: "1.05rem", color: "var(--secondary)", lineHeight: 1.7 }}>{b}</p>
+              <p key={b} className="font-body" style={{ fontSize: "1.1rem", color: "var(--secondary)", lineHeight: 1.8 }}>{b}</p>
             ))}
           </div>
           {item.tags && item.tags.length > 0 && (
