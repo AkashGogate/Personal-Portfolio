@@ -74,7 +74,7 @@ export default function RootLayout({
       <body className={`${playfair.variable} ${inter.variable}`}>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd).replace(/</g, "\\u003c") }}
         />
         <ThemeProvider>{children}</ThemeProvider>
       </body>

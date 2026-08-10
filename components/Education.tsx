@@ -1,11 +1,17 @@
+"use client";
+
 import SectionLabel from "./SectionLabel";
 import { education } from "@/data/resume";
+import { useScrollFade } from "@/lib/useScrollFade";
 
 export default function Education() {
+  const [headerRef, headerVisible] = useScrollFade<HTMLDivElement>();
+  const [courseworkRef, courseworkVisible] = useScrollFade<HTMLDivElement>();
+
   return (
     <section id="education" style={{ background: "var(--surface)", paddingTop: "clamp(3rem, 6vh, 6rem)", paddingBottom: "clamp(3rem, 6vh, 6rem)" }}>
       <div className="max-w-7xl mx-auto px-6">
-        <div className="mb-10">
+        <div ref={headerRef} className={`scroll-fade ${headerVisible ? "visible" : ""} mb-10`}>
           <SectionLabel number="07" label="Education" className="mb-6" />
           <h2
             className="font-display"
@@ -26,7 +32,7 @@ export default function Education() {
 
         <div style={{ borderTop: "1px solid var(--border)", marginBottom: "2.5rem" }} />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-8">
+        <div ref={courseworkRef} className={`scroll-fade ${courseworkVisible ? "visible" : ""} grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-8`}>
           {education.coursework.map((group) => (
             <div key={group.area}>
               <p className="section-label mb-5" style={{ borderLeft: "2px solid var(--mint)", paddingLeft: "10px" }}>

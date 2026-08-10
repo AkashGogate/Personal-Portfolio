@@ -1,7 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import SectionLabel from "./SectionLabel";
 import { projects } from "@/data/resume";
 import { isKnownSkill, skillSlug } from "@/lib/skills";
+import { useScrollFade } from "@/lib/useScrollFade";
 
 const BASE = process.env.NEXT_PUBLIC_BASEPATH ?? "";
 
@@ -12,18 +15,20 @@ const featured = (() => {
 })();
 
 export default function FeaturedProject() {
+  const [fadeRef, isVisible] = useScrollFade<HTMLDivElement>();
+
   return (
     <section id="featured-project" style={{ background: "var(--bg)", paddingTop: "clamp(3rem, 6vh, 6rem)", paddingBottom: "clamp(3rem, 6vh, 6rem)" }}>
       <div className="max-w-7xl mx-auto px-6">
-        <SectionLabel number="01" label="Featured Project" className="mb-6" />
+        <SectionLabel number="02" label="Featured" className="mb-6" />
         <div
           className="hover-card flex flex-col md:flex-row gap-10 items-center"
           style={{ borderTop: "1px solid var(--border)", borderRight: "1px solid var(--border)", borderBottom: "1px solid var(--border)", padding: "2rem" }}
         >
           <div className="flex-1" style={{ position: "relative", width: "100%", aspectRatio: "4 / 3" }}>
-            <Image src={`${BASE}${featured.imageSrc}`} alt={featured.title} fill style={{ objectFit: "cover" }} />
+            <Image src={`${BASE}${featured.imageSrc}`} alt={featured.title} fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: "cover" }} />
           </div>
-          <div className="flex-1">
+          <div ref={fadeRef} className={`scroll-fade ${isVisible ? "visible" : ""} flex-1`}>
             <h2 className="font-display" style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)", fontWeight: 400, color: "var(--primary)", marginBottom: "1rem" }}>
               {featured.title}
             </h2>

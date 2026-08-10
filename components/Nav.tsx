@@ -1,17 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTheme } from "./ThemeProvider";
+import { scrollToSection } from "@/lib/scrollToSection";
+
+const BASE = process.env.NEXT_PUBLIC_BASEPATH ?? "";
 
 const links = [
-  { label: "Home", href: "#hero" },
-  { label: "Featured Project", href: "#featured-project" },
-  { label: "About", href: "#about" },
-  { label: "Experience", href: "#experience" },
-  { label: "Projects", href: "#projects" },
-  { label: "Skills", href: "#skills" },
-  { label: "Education", href: "#education" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "hero" },
+  { label: "Featured Project", href: "featured-project" },
+  { label: "About", href: "about" },
+  { label: "Experience", href: "experience" },
+  { label: "Projects", href: "projects" },
+  { label: "Skills", href: "skills" },
+  { label: "Education", href: "education" },
+  { label: "Contact", href: "contact" },
 ];
 
 function ThemeIcon({ theme }: { theme: "light" | "dark" }) {
@@ -36,7 +39,28 @@ function ThemeIcon({ theme }: { theme: "light" | "dark" }) {
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState("hero");
   const { theme, toggle } = useTheme();
+
+  useEffect(() => {
+    const onScroll = () => {
+      let current = links[0].href;
+      for (const l of links) {
+        const el = document.getElementById(l.href);
+        if (el && el.getBoundingClientRect().top <= 120) current = l.href;
+      }
+      setActive((prev) => (prev === current ? prev : current));
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const go = (id: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    scrollToSection(id);
+    setOpen(false);
+  };
 
   return (
     <header
@@ -44,7 +68,7 @@ export default function Nav() {
       style={{ background: "var(--bg)", borderBottom: "1px solid var(--border)" }}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
-        <a href="#hero" className="font-display hover-mint" style={{ color: "var(--primary)", fontWeight: 600, fontSize: "1.25rem" }}>
+        <a href="#hero" onClick={go("hero")} className="font-display hover-mint" style={{ color: "var(--primary)", fontWeight: 600, fontSize: "1.25rem" }}>
           Akash Gogate
         </a>
 
@@ -52,13 +76,31 @@ export default function Nav() {
           {links.map((l) => (
             <a
               key={l.href}
-              href={l.href}
+              href={`#${l.href}`}
+              onClick={go(l.href)}
+              aria-current={active === l.href ? "page" : undefined}
               className="font-body hover-mint"
-              style={{ fontSize: "0.72rem", letterSpacing: "0.07em", textTransform: "uppercase", color: "var(--secondary)" }}
+              style={{
+                fontSize: "0.72rem",
+                letterSpacing: "0.07em",
+                textTransform: "uppercase",
+                color: active === l.href ? "var(--mint)" : "var(--secondary)",
+                borderBottom: active === l.href ? "1px solid var(--mint)" : "1px solid transparent",
+                paddingBottom: "2px",
+              }}
             >
               {l.label}
             </a>
           ))}
+          <a
+            href={`${BASE}/resumes/resume.pdf`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-body hover-mint"
+            style={{ fontSize: "0.72rem", letterSpacing: "0.07em", textTransform: "uppercase", color: "var(--primary)" }}
+          >
+            Resume
+          </a>
           <button
             type="button"
             onClick={toggle}
@@ -97,14 +139,30 @@ export default function Nav() {
             {links.map((l) => (
               <a
                 key={l.href}
-                href={l.href}
+                href={`#${l.href}`}
+                onClick={go(l.href)}
+                aria-current={active === l.href ? "page" : undefined}
                 className="font-body hover-mint"
-                style={{ fontSize: "0.75rem", letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--secondary)" }}
-                onClick={() => setOpen(false)}
+                style={{
+                  fontSize: "0.75rem",
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                  color: active === l.href ? "var(--mint)" : "var(--secondary)",
+                }}
               >
                 {l.label}
               </a>
             ))}
+            <a
+              href={`${BASE}/resumes/resume.pdf`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-body hover-mint"
+              style={{ fontSize: "0.75rem", letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--primary)" }}
+              onClick={() => setOpen(false)}
+            >
+              Resume
+            </a>
           </div>
         </div>
       )}

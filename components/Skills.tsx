@@ -1,17 +1,25 @@
+"use client";
+
 import SectionLabel from "./SectionLabel";
 import { skillGroups } from "@/data/resume";
 import { skillSlug } from "@/lib/skills";
+import { useScrollFade } from "@/lib/useScrollFade";
 
 export default function Skills() {
+  const [headerRef, headerVisible] = useScrollFade<HTMLDivElement>();
+  const [listRef, listVisible] = useScrollFade<HTMLDivElement>();
+
   return (
     <section id="skills" style={{ background: "var(--bg)", paddingTop: "clamp(3rem, 6vh, 7rem)", paddingBottom: "clamp(3rem, 6vh, 7rem)" }}>
       <div className="max-w-7xl mx-auto px-6">
-        <SectionLabel number="06" label="Skills" className="mb-6" />
-        <p className="font-body mb-10" style={{ fontSize: "1.1rem", color: "var(--secondary)", lineHeight: 1.75, maxWidth: "44ch" }}>
-          Here&apos;s where I am right now. Most of it I picked up quickly on real projects, and the list keeps growing.
-        </p>
+        <div ref={headerRef} className={`scroll-fade ${headerVisible ? "visible" : ""}`}>
+          <SectionLabel number="06" label="Skills" className="mb-6" />
+          <p className="font-body mb-10" style={{ fontSize: "1.1rem", color: "var(--secondary)", lineHeight: 1.75, maxWidth: "44ch" }}>
+            Here&apos;s where I am right now. Most of it I picked up quickly on real projects, and the list keeps growing.
+          </p>
+        </div>
 
-        <div style={{ border: "1px solid var(--border)" }}>
+        <div ref={listRef} className={`scroll-fade ${listVisible ? "visible" : ""}`} style={{ border: "1px solid var(--border)" }}>
           {skillGroups.map((group, gi) => (
             <div
               key={group.category}

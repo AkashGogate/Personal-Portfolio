@@ -1,4 +1,7 @@
+"use client";
+
 import SectionLabel from "./SectionLabel";
+import { useScrollFade } from "@/lib/useScrollFade";
 
 const links = [
   { label: "Email", value: "akash.gogate@gmail.com", href: "mailto:akash.gogate@gmail.com" },
@@ -8,20 +11,25 @@ const links = [
 ];
 
 export default function Contact() {
+  const [headerRef, headerVisible] = useScrollFade<HTMLDivElement>();
+  const [linksRef, linksVisible] = useScrollFade<HTMLDivElement>();
+
   return (
     <section id="contact" style={{ background: "var(--bg)", paddingTop: "clamp(3rem, 6vh, 6rem)", paddingBottom: "clamp(3rem, 6vh, 6rem)" }}>
       <div className="max-w-7xl mx-auto px-6">
         <div style={{ borderTop: "1px solid var(--border)", marginBottom: "4rem" }} />
-        <SectionLabel number="08" label="Contact" className="mb-4" />
-        <h2 className="font-display mb-6" style={{ fontSize: "clamp(2.1rem, 3.5vw, 3.2rem)", fontWeight: 400, color: "var(--primary)" }}>
-          Get in touch
-        </h2>
-        <p className="font-body mb-8 max-w-xl" style={{ fontSize: "1.12rem", color: "var(--secondary)", lineHeight: 1.8 }}>
-          Open to Summer 2027 internships and co-ops in software engineering, AI/ML, data science, biotech, and
-          computational biology research. Available May 15 – Sep 1. Email is the best way to reach me.
-        </p>
+        <div ref={headerRef} className={`scroll-fade ${headerVisible ? "visible" : ""}`}>
+          <SectionLabel number="08" label="Contact" className="mb-4" />
+          <h2 className="font-display mb-6" style={{ fontSize: "clamp(2.1rem, 3.5vw, 3.2rem)", fontWeight: 400, color: "var(--primary)" }}>
+            Get in touch
+          </h2>
+          <p className="font-body mb-8 max-w-xl" style={{ fontSize: "1.12rem", color: "var(--secondary)", lineHeight: 1.8 }}>
+            Open to Summer 2027 internships and co-ops in software engineering, AI/ML, data science, biotech, and
+            computational biology research. Available May 15 – Sep 1. Email is the best way to reach me.
+          </p>
+        </div>
 
-        <div className="flex flex-col gap-6">
+        <div ref={linksRef} className={`scroll-fade ${linksVisible ? "visible" : ""} flex flex-col gap-6`}>
           {links.map((l) => (
             <div key={l.label}>
               <div className="section-label mb-1">{l.label}</div>

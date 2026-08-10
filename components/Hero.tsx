@@ -1,4 +1,7 @@
+"use client";
+
 import HeroCanvas from "./HeroCanvas";
+import { scrollToSection } from "@/lib/scrollToSection";
 
 const BASE = process.env.NEXT_PUBLIC_BASEPATH ?? "";
 const LABEL = "Software Engineer · Researcher · AI / ML · Data";
@@ -51,13 +54,21 @@ export default function Hero() {
         </div>
 
         <div className="flex flex-wrap gap-4 items-start">
-          <a href="#projects" className="font-body text-sm px-5 py-2.5 btn-outline-primary">
+          <a
+            href="#projects"
+            onClick={(e) => { e.preventDefault(); scrollToSection("projects"); }}
+            className="font-body text-sm px-5 py-2.5 btn-outline-primary"
+          >
             View Projects
           </a>
           <a href={`${BASE}/resumes/resume.pdf`} download="Gogate Akash Resume.pdf" className="font-body text-sm px-5 py-2.5 btn-outline-secondary">
             Download Resume
           </a>
-          <a href="#contact" className="font-body text-sm px-5 py-2.5 btn-outline-secondary">
+          <a
+            href="#contact"
+            onClick={(e) => { e.preventDefault(); scrollToSection("contact"); }}
+            className="font-body text-sm px-5 py-2.5 btn-outline-secondary"
+          >
             Contact
           </a>
         </div>
