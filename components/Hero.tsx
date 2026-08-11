@@ -27,7 +27,7 @@ export default function Hero() {
           className="font-display"
           style={{ fontSize: "clamp(2rem, 8vw, 5rem)", fontWeight: 400, color: "var(--primary)", lineHeight: 1.15, maxWidth: "18ch" }}
         >
-          Exploring the space where systems think and biology inspires.
+          Building software. Studying biology.
         </h1>
 
         <div style={{ borderTop: "1px solid var(--border)", width: "6rem", margin: "2rem 0" }} />
@@ -37,7 +37,7 @@ export default function Hero() {
         </p>
 
         <p className="font-body" style={{ fontSize: "0.97rem", color: "var(--secondary)", lineHeight: 1.75, maxWidth: "36rem", marginBottom: "1.5rem" }}>
-          CS + Biology at UW-Madison | Computing for biology&apos;s next frontier.
+          CS + Biology at UW-Madison | Using software to work on biology problems.
         </p>
 
         <div style={{ marginBottom: "1.75rem" }}>

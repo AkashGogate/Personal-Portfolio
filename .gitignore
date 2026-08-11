@@ -4,3 +4,13 @@ out/
 *.tsbuildinfo
 next-env.d.ts
 .DS_Store
+
+# Next.js auto-generates these agent-context files at dev/build time
+# (agentRules feature) — not meant to be tracked.
+/AGENTS.md
+/CLAUDE.md
+
+# Session handoff / scratch notes — never tracked, this repo isn't an
+# agent/plugin repo so only README.md should be tracked markdown.
+HANDOFF*.md
+feedback.md

@@ -19,7 +19,7 @@ const inter = Inter({
 const SITE_URL = "https://personalportfoliowebsite.akashgogate.com";
 const TITLE = "Akash Gogate — Software Engineer & Researcher";
 const DESCRIPTION =
-  "CS + Biology student at UW-Madison. Building at the intersection of distributed systems and biological data science.";
+  "CS + Biology student at UW-Madison, building software for distributed systems and biology research.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

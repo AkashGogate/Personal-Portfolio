@@ -8,8 +8,8 @@ const BASE = process.env.NEXT_PUBLIC_BASEPATH ?? "";
 
 const links = [
   { label: "Home", href: "hero" },
-  { label: "Featured Project", href: "featured-project" },
   { label: "About", href: "about" },
+  { label: "Featured Project", href: "featured-project" },
   { label: "Experience", href: "experience" },
   { label: "Projects", href: "projects" },
   { label: "Skills", href: "skills" },

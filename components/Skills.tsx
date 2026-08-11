@@ -15,7 +15,7 @@ export default function Skills() {
         <div ref={headerRef} className={`scroll-fade ${headerVisible ? "visible" : ""}`}>
           <SectionLabel number="06" label="Skills" className="mb-6" />
           <p className="font-body mb-10" style={{ fontSize: "1.1rem", color: "var(--secondary)", lineHeight: 1.75, maxWidth: "44ch" }}>
-            Here&apos;s where I am right now. Most of it I picked up quickly on real projects, and the list keeps growing.
+            Here&apos;s where I am right now. Picked up most of these through working on real projects, and the list keeps growing.
           </p>
         </div>
 

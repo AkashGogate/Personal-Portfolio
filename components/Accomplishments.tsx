@@ -92,7 +92,7 @@ export default function Accomplishments() {
         <div ref={headerRef} className={`scroll-fade ${headerVisible ? "visible" : ""} mb-8`}>
           <SectionLabel number="04" label="Accomplishments" className="mb-4" />
           <h2 className="font-display" style={{ fontSize: "clamp(1.6rem, 3vw, 2.2rem)", fontWeight: 400, color: "var(--primary)" }}>
-            Recognition along the way.
+            Recognition & Awards
           </h2>
         </div>
 
