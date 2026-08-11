@@ -227,14 +227,18 @@ export const experienceSections: ExperienceSection[] = [
       {
         company: "Leidos",
         role: "Software Engineer Intern",
-        period: "May 2025 — Present",
+        period: "May 2025 - Present",
         bullets: [
-          "Leidos' satellite fleet needed to schedule competing observation requests against a shared set of ground assets — a classic multi-objective optimization problem. I applied dynamic programming and memoization in Python to prototype a scheduling engine, then rewrote the entire engine in Rust once the approach proved out, since the team's production microservice ecosystem demanded stricter reliability and lower latency than a Python service could guarantee at scale.",
+          "Leidos' satellite fleet needed to schedule competing observation requests against a shared set of ground assets, a classic multi-objective optimization problem. I applied dynamic programming and memoization in Python to prototype a scheduling engine, then rewrote the entire engine in Rust once the approach proved out, since the team's production microservice ecosystem demanded stricter reliability and lower latency than a Python service could guarantee at scale.",
           "To keep scheduling decoupled from the rest of the satellite operations stack, I designed an event-driven data pipeline on Kafka with at-least-once delivery semantics, persisting results to MongoDB. That decoupling meant any one service could fail or redeploy without taking down the mission-critical scheduling path around it.",
           "I containerized the team's test suite with Docker and ran it on Kubernetes, wiring the whole thing into GitHub Actions CI/CD. Writing pytest coverage across boundary conditions and deliberate fault injection meant regressions got caught in CI before they ever reached production.",
           "Separately, I built a Claude Code MCP plugin from scratch on top of an institutional knowledge graph mapping the team's ontologies and service dependencies. It now serves roughly 30 engineers across a multi-team defense program, giving them a shared, queryable map of how services relate instead of relying on tribal knowledge.",
+          "I also built a solo Android ATAK (tactical mapping) plugin from scratch over four weeks, adding voice-activated situational awareness for field operations. Speech recognition had to run fully offline, on-device, for security, so I integrated a local whisper.cpp model into a command pipeline that classifies spoken reports against two structured formats, a UXO (unexploded ordnance) report and a 9-line MEDEVAC request, then extracts location and threat details from natural speech and plots the result on live tactical maps in about 10 seconds end to end. It hit 100% accuracy on marker-type classification and about 5% average word error rate across both schemas.",
+          "I also contributed to the team's distributed media pipeline, a multi-service system spanning MongoDB, S3, a CDN layer, and Kafka for tactical communication media. I owned data ingestion and storage: writing the Kafka consumer that processed incoming topic data, optimizing MongoDB schemas for cleaner data structuring, and building the S3 upload and delete handlers.",
+          "Separately, I built a natural-language query tool for aircraft fleet readiness, a React frontend on top of DuckDB for fast analytical SQL and Redis for sub-second caching, so operators could ask plain-English questions about fleet status and get an answer without knowing the underlying schema.",
+          "I also extended the team's REST API for querying stored tactical event data, adding five new filter dimensions (unit ID, callsign, event type, time window, and geographic area) while keeping full backward compatibility with the existing endpoints. I documented it in OpenAPI/Swagger and got the new code path to over 90% test coverage.",
         ],
-        tags: ["Python", "Kafka", "Kubernetes", "Docker", "MongoDB", "Dynamic Programming", "GitHub Actions", "CI/CD", "Rust", "Neo4j"],
+        tags: ["Python", "Kafka", "Kubernetes", "Docker", "MongoDB", "Dynamic Programming", "GitHub Actions", "CI/CD", "Rust", "Neo4j", "Whisper", "ATAK", "REST API", "DuckDB", "Redis", "AWS S3"],
         imageSrc: "/images/experience/leidos.jpg",
       },
     ],
@@ -244,11 +248,11 @@ export const experienceSections: ExperienceSection[] = [
     label: "Research & Biotech",
     items: [
       {
-        company: "The Kendziorski Lab — UW-Madison",
+        company: "The Kendziorski Lab, UW-Madison",
         role: "Student Research Intern",
-        period: "September 2025 — Present",
+        period: "September 2025 - Present",
         bullets: [
-          "The lab's spatial transcriptomics work spans single-cell RNA sequencing (scRNA-seq), next-generation sequencing (NGS), and spatial transcriptomics data, each of which suits different model architectures. I built an end-to-end ML pipeline in PyTorch and TensorFlow with an agentic layer that automatically selects and evaluates the right model — scVI, scANVI, scGen, or AmortizedLDA — for a given dataset, with every run tracked in Weights & Biases. Tuning that pipeline for scale cut GPU runtime from 80 minutes down to 27 on identical hardware, a roughly 300% reduction that matters when the lab is iterating across dozens of datasets.",
+          "The lab's spatial transcriptomics work spans single-cell RNA sequencing (scRNA-seq), next-generation sequencing (NGS), and spatial transcriptomics data, each of which suits different model architectures. I built an end-to-end ML pipeline in PyTorch and TensorFlow with an agentic layer that automatically selects and evaluates the right model (scVI, scANVI, scGen, or AmortizedLDA) for a given dataset, with every run tracked in Weights & Biases. Tuning that pipeline for scale cut GPU runtime from 80 minutes down to 27 on identical hardware, a roughly 300% reduction that matters when the lab is iterating across dozens of datasets.",
           "Keeping up with clinical genomics literature was its own bottleneck, so I built TransferAgent to automate NLP-based literature synthesis and cross-paper validity scoring across roughly 500 clinical genomics papers. It cut review time by about 60%, and I worked directly with clinicians in the lab to make sure the synthesis reflected clinical relevance, not just statistical significance.",
           "That pipeline work is now feeding into an ongoing clinical genomics publication targeting a peer-reviewed computational biology journal, where I've been validating model performance and pipeline reproducibility for glioblastoma gene therapy research across a 10-person interdisciplinary lab.",
         ],
@@ -258,7 +262,7 @@ export const experienceSections: ExperienceSection[] = [
       {
         company: "Inspirit AI",
         role: "Machine Learning Research Intern",
-        period: "Sep 2022 — Mar 2023",
+        period: "Sep 2022 - Mar 2023",
         bullets: [
           "I built a skin cancer detection pipeline using OpenCV for image preprocessing and scikit-learn (with NumPy/Pandas handling the data wrangling) that reached 95% classification accuracy across roughly 70,000 dermoscopic images. That work became my first published paper, 'Early Skin Cancer Detection Improvement,' through Inspirit AI.",
           "In parallel, I trained and validated a Random Forest classifier on miRNA sequences for cancer cell likelihood prediction, reaching 95% predictive accuracy at p < 0.05, validated with stratified k-fold cross-validation to make sure the result generalized rather than overfitting to one split of the data.",
@@ -275,9 +279,9 @@ export const experienceSections: ExperienceSection[] = [
       {
         company: "Princeton Racket Club",
         role: "Tennis Coach & Tournament Director",
-        period: "May 2024 — Aug 2024",
+        period: "May 2024 - Aug 2024",
         bullets: [
-          "I held a dual role as tournament director and head coach at Princeton Racket Club: directing 8 regional tournaments end to end — 380+ match entries, every one starting on time — while also coaching 3 classes of 8-10 athletes spanning ages 8 to 65.",
+          "I held a dual role as tournament director and head coach at Princeton Racket Club: directing 8 regional tournaments end to end (380+ match entries, every one starting on time) while also coaching 3 classes of 8-10 athletes spanning ages 8 to 65.",
           "On the coaching side, I built data-driven, skill-adapted regimens for individual athletes rather than running one generic program for everyone. That approach guided 3 junior athletes to over 150 regional ranking points combined and helped 5 adult players climb a full 0.5 NTRP competitive level.",
         ],
         tags: ["Leadership", "Communication", "Event Management"],
@@ -286,10 +290,10 @@ export const experienceSections: ExperienceSection[] = [
       {
         company: "Tennis Racket Stringing Services",
         role: "Founder",
-        period: "Jan 2019 — Present",
+        period: "Jan 2019 - Present",
         bullets: [
           "I founded an independent racket stringing business from scratch and scaled it to 45+ regular clients, servicing 12-20 rackets a month across two service tiers: a standard 3-4 day turnaround and a premium 2-day option for players who needed their racket back fast.",
-          "Growing the client base meant leaning on grassroots channels rather than paid marketing — word-of-mouth referrals, flyers at local parks, referral discounts through high school tennis teams, and an Instagram page showcasing the stringing craftsmanship itself.",
+          "Growing the client base meant leaning on grassroots channels rather than paid marketing: word-of-mouth referrals, flyers at local parks, referral discounts through high school tennis teams, and an Instagram page showcasing the stringing craftsmanship itself.",
         ],
         tags: ["Entrepreneurship", "Operations", "Client Relations", "Inventory Management"],
         imageSrc: "/images/experience/stringing.jpg",
@@ -356,7 +360,7 @@ export const projects: Project[] = [
     id: "sat-generator",
     title: "SAT Practice Test Generator",
     description: "GPT-4o tutor that finds your weak SAT domains and generates exam-matched practice questions on demand.",
-    detail: "Built full-stack SAT prep app (TypeScript/JavaScript/React.js + Node.js/FastAPI); integrated GPT-4o generative AI for adaptive question generation via REST API with session state, scoring, and configurable difficulty; agile version control. Backend separates LLM integration layer, API layer, and session management; clean object-oriented design with stateful session logic and auditable answer validation pipeline.",
+    detail: "Built a full-stack SAT prep app (React.js/TypeScript + FastAPI) covering all 3 SAT sections (Math, Reading, Writing), with 5 pre-cached test sets per section (75 questions total) and GPT-4o adaptive question generation layered on top for score prediction and unscored practice modes. Backend separates the LLM integration, REST API, and session-state layers, with a rubric-based answer validation pipeline and per-session difficulty recalibration. Tested by friends and family beyond solo development.",
     tags: ["TypeScript", "React.js", "Node.js", "FastAPI", "GPT-4o", "Python"],
     github: "https://github.com/AkashGogate/SATPracticeTestGenerator",
     imageSrc: "/images/projects/sat-generator.jpg",
@@ -365,7 +369,7 @@ export const projects: Project[] = [
     id: "hand-tracking",
     title: "Computer Vision Hand Tracking System",
     description: "Real-time hand gesture and joint angle tracking pipeline using OpenCV and MediaPipe. Outputs biomechanical data for clinical motion capture, rehabilitation, and sports performance analysis.",
-    detail: "Built real-time hand gesture and joint angle tracking pipeline (OpenCV + MediaPipe); outputs biomechanical data for clinical motion capture, rehabilitation monitoring, and sports performance analysis. Processes live webcam input with OpenCV for frame capture and MediaPipe for hand landmark detection; outputs joint positions, wrist orientation, and finger positions at video frame rate. Dual application: sports coaching (quantitative grip and swing feedback) and clinical biomechanics.",
+    detail: "Built a real-time biomechanical tracking pipeline (OpenCV + MediaPipe) running at 60 FPS with sub-2-second end-to-end latency, tracking all 21 hand landmarks alongside full-body pose simultaneously. Computes joint angles in degrees from 3D landmark coordinates, classifies hand gestures from configuration topology, and outputs structured multi-channel data for sports performance analysis and clinical motion capture.",
     tags: ["Python", "OpenCV", "MediaPipe", "Computer Vision"],
     github: "https://github.com/AkashGogate/HandOrientationTracking",
     imageSrc: "/images/projects/hand-tracking.jpg",
@@ -373,8 +377,8 @@ export const projects: Project[] = [
   {
     id: "eco-game",
     title: "Ecological Conservation Game",
-    description: "Multi-threaded C++ simulation where AI bots compete for survival under configurable ecological constraints.",
-    detail: "Built a multi-threaded, AI-driven multi-agent C++ simulation with Raylib; autonomous bots exhibit emergent behaviors under ecological constraints with a real-time game loop. Bots compete for resources under configurable constraints (food scarcity, predation, territory), producing emergent behavior from simple rule sets. Demonstrates carrying capacity, predator-prey dynamics, and resource competition through interactive simulation.",
+    description: "10,000-agent C++ simulation with spatial hashing and GPU-instanced rendering, sustaining 60+ FPS as bots evolve across generations.",
+    detail: "Built a 10,000+ agent ecological simulation in C++ with Raylib, sustaining a locked 60+ FPS across a 10,000x10,000 unit world. Used spatial hashing to cut per-frame proximity checks from O(N squared) to O(N), an Entity Component System with a Struct-of-Arrays memory layout for cache-friendly agent data, and GPU-instanced rendering to draw all 10,000 agents in a single draw call. Four species (two base, two emergent hybrids) evolve speed, size, food-collection radius, and predation capability across generations through a reproduction and interbreeding system, producing emergent multi-generational behavior with no scripted behavior trees.",
     tags: ["C++", "Raylib", "Game AI", "Multi-Agent", "Simulation"],
     github: "https://github.com/AkashGogate/EcologicalConservationBots",
     imageSrc: "/images/projects/eco-game.jpg",
@@ -382,8 +386,8 @@ export const projects: Project[] = [
   {
     id: "usta-explorer",
     title: "USTA Tournament Explorer",
-    description: "Android app for browsing and filtering USTA tennis tournaments by region, level, and surface.",
-    detail: "Built Android app in Java consuming USTA's GraphQL API to surface local tournament data via REST API; sole developer end-to-end. Uses Android SDK and HttpURLConnection to retrieve local tournament listings, registration deadlines, and location data; redirects to the USTA site for registration.",
+    description: "Android app for discovering USTA tennis tournaments with an interactive map, radius filtering, and NTRP skill-level matching.",
+    detail: "Built an Android app in Java consuming USTA's GraphQL API to surface tournament discovery data: 7+ data points per tournament (signup links, competitive level, distance from user, ball type, draw size, registration status, eligibility), an interactive map for geographic browsing, a configurable radius filter, and an NTRP skill-rating filter for finding tournaments at the right competitive level. Sole developer end-to-end.",
     tags: ["Android SDK", "Java", "GraphQL", "Mobile"],
     github: "https://github.com/AkashGogate/myUSTA",
     note: "APK available — see GitHub",
