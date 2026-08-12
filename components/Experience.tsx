@@ -3,7 +3,7 @@
 import Image from "next/image";
 import SectionLabel from "./SectionLabel";
 import { experienceSections, type ExperienceItem } from "@/data/resume";
-import { skillHref } from "@/lib/skills";
+import { isKnownSkill, skillHref } from "@/lib/skills";
 import { useScrollFade } from "@/lib/useScrollFade";
 import { scrollToSection } from "@/lib/scrollToSection";
 
@@ -24,7 +24,7 @@ function ExperienceCard({ item, sectionLabel }: { item: ExperienceItem; sectionL
       )}
       <div ref={fadeRef} className={`scroll-fade ${isVisible ? "visible" : ""}`} style={{ padding: "2rem" }}>
         <div className="section-label mb-2" style={{ color: "var(--mint)" }}>{sectionLabel}</div>
-        <h3 className="font-display" style={{ fontSize: "clamp(1.3rem, 4vw, 1.8rem)", fontWeight: 400, color: "var(--primary)", marginBottom: "0.3rem" }}>
+        <h3 className="font-display card-title" style={{ fontSize: "clamp(1.3rem, 4vw, 1.8rem)", fontWeight: 400, color: "var(--primary)", marginBottom: "0.3rem" }}>
           {item.company}
         </h3>
         <p className="font-body" style={{ fontSize: "1rem", color: "var(--secondary)", marginBottom: "0.1rem" }}>{item.role}</p>
@@ -37,24 +37,31 @@ function ExperienceCard({ item, sectionLabel }: { item: ExperienceItem; sectionL
         {item.tags && item.tags.length > 0 && (
           <>
             <div className="flex flex-wrap gap-2">
-              {item.tags.map((tag) => (
-                <a
-                  key={tag}
-                  href={skillHref(tag)}
-                  className="font-body hover-mint"
-                  style={{
-                    fontSize: "0.72rem",
-                    letterSpacing: "0.08em",
-                    textTransform: "uppercase" as const,
-                    padding: "4px 10px",
-                    border: "1px solid var(--border)",
-                    color: "var(--secondary)",
-                  }}
-                  onClick={(e) => { e.preventDefault(); scrollToSection(skillHref(tag).slice(1)); }}
-                >
-                  {tag}
-                </a>
-              ))}
+              {item.tags.map((tag) => {
+                const badgeStyle = {
+                  fontSize: "0.72rem",
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase" as const,
+                  padding: "4px 10px",
+                  border: "1px solid var(--border)",
+                  color: "var(--secondary)",
+                };
+                return isKnownSkill(tag) ? (
+                  <a
+                    key={tag}
+                    href={skillHref(tag)}
+                    className="font-body hover-mint"
+                    style={badgeStyle}
+                    onClick={(e) => { e.preventDefault(); scrollToSection(skillHref(tag).slice(1)); }}
+                  >
+                    {tag}
+                  </a>
+                ) : (
+                  <span key={tag} className="font-body" style={badgeStyle}>
+                    {tag}
+                  </span>
+                );
+              })}
             </div>
             <p className="font-body mt-3" style={{ fontSize: "0.8rem", color: "var(--secondary)" }}>
               See more in the{" "}

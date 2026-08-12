@@ -14,6 +14,9 @@ export default function Skills() {
       <div className="max-w-7xl mx-auto px-6">
         <div ref={headerRef} className={`scroll-fade ${headerVisible ? "visible" : ""}`}>
           <SectionLabel number="06" label="Skills" className="mb-6" />
+          <p className="font-display italic" style={{ fontSize: "1.5rem", color: "var(--mint)", marginBottom: "0.75rem" }}>
+            Always learning.
+          </p>
           <p className="font-body mb-10" style={{ fontSize: "1.1rem", color: "var(--secondary)", lineHeight: 1.75, maxWidth: "44ch" }}>
             Here&apos;s where I am right now. Picked up most of these through working on real projects, and the list keeps growing.
           </p>

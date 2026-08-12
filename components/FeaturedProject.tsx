@@ -29,7 +29,7 @@ export default function FeaturedProject() {
             <Image src={`${BASE}${featured.imageSrc}`} alt={featured.title} fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: "cover" }} />
           </div>
           <div ref={fadeRef} className={`scroll-fade ${isVisible ? "visible" : ""} flex-1`}>
-            <h2 className="font-display" style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)", fontWeight: 400, color: "var(--primary)", marginBottom: "1rem" }}>
+            <h2 className="font-display card-title" style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)", fontWeight: 400, color: "var(--primary)", marginBottom: "1rem" }}>
               {featured.title}
             </h2>
             <p className="font-body" style={{ fontSize: "1.15rem", color: "var(--secondary)", lineHeight: 1.8, marginBottom: "1.25rem" }}>

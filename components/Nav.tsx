@@ -186,6 +186,7 @@ export default function Nav() {
             type="button"
             onClick={toggle}
             aria-label="Toggle theme"
+            className="hover-mint"
             style={{ background: "none", border: "none", cursor: "pointer", color: "var(--secondary)", display: "flex", alignItems: "center", padding: "4px" }}
           >
             <ThemeIcon theme={theme} />
@@ -194,7 +195,7 @@ export default function Nav() {
             type="button"
             aria-expanded={open}
             onClick={() => setOpen(!open)}
-            className="font-body"
+            className="font-body hover-mint"
             style={{ fontSize: "0.75rem", letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--secondary)", background: "none", border: "none", cursor: "pointer" }}
           >
             {open ? "Close" : "Menu"}

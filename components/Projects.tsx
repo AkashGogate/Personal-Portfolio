@@ -4,29 +4,46 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import SectionLabel from "./SectionLabel";
 import { projects, type Project } from "@/data/resume";
-import { skillHref } from "@/lib/skills";
+import { isKnownSkill, skillHref } from "@/lib/skills";
 import { useScrollFade } from "@/lib/useScrollFade";
 import { scrollToSection } from "@/lib/scrollToSection";
 
 const BASE = process.env.NEXT_PUBLIC_BASEPATH ?? "";
 const rest = projects.filter((p) => p.id !== "self-improving-agent");
 
-function TagList({ tags }: { tags: string[] }) {
+function TagList({ tags, onBeforeNavigate }: { tags: string[]; onBeforeNavigate?: () => void }) {
   return (
     <>
-      {tags.map((tag, i) => (
-        <span key={tag}>
-          {i > 0 && " / "}
-          <a
-            href={skillHref(tag)}
-            className="hover-mint"
-            style={{ color: "inherit", position: "relative", zIndex: 2 }}
-            onClick={(e) => { e.preventDefault(); e.stopPropagation(); scrollToSection(skillHref(tag).slice(1)); }}
-          >
-            {tag}
-          </a>
-        </span>
-      ))}
+      {tags.map((tag, i) => {
+        const clickable = isKnownSkill(tag);
+        return (
+          <span key={tag}>
+            {i > 0 && " / "}
+            {clickable ? (
+              <a
+                href={skillHref(tag)}
+                className="hover-mint"
+                style={{ color: "inherit", position: "relative", zIndex: 2 }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  const dest = skillHref(tag).slice(1);
+                  if (onBeforeNavigate) {
+                    onBeforeNavigate();
+                    setTimeout(() => scrollToSection(dest), 360);
+                  } else {
+                    scrollToSection(dest);
+                  }
+                }}
+              >
+                {tag}
+              </a>
+            ) : (
+              <span style={{ color: "inherit" }}>{tag}</span>
+            )}
+          </span>
+        );
+      })}
     </>
   );
 }
@@ -107,7 +124,7 @@ function ProjectDrawer({ project, onClose }: { project: Project; onClose: () => 
             {project.detail}
           </p>
           <p className="font-body mb-2" style={{ fontSize: "0.88rem", color: "var(--secondary)", letterSpacing: "0.04em" }}>
-            <TagList tags={project.tags} />
+            <TagList tags={project.tags} onBeforeNavigate={handleClose} />
           </p>
           <p className="font-body mb-8" style={{ fontSize: "0.8rem", color: "var(--secondary)" }}>
             See more in the{" "}
@@ -173,7 +190,7 @@ function ProjectRow({ p, onSelect }: { p: Project; onSelect: (p: Project) => voi
           <span className="font-body" style={{ fontSize: "0.85rem", color: "var(--secondary)" }}>
             <TagList tags={p.tags.slice(0, 4)} />
           </span>
-          <span className="font-body" style={{ fontSize: "0.7rem", color: "var(--secondary)", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+          <span className="font-body explore-cta" style={{ fontSize: "0.7rem", color: "var(--secondary)", letterSpacing: "0.08em", textTransform: "uppercase" }}>
             Click to explore ↗
           </span>
           {p.github && (
@@ -181,7 +198,7 @@ function ProjectRow({ p, onSelect }: { p: Project; onSelect: (p: Project) => voi
               href={p.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-body text-xs hover-mint"
+              className="font-body text-xs hover-mint row-github-link"
               style={{ color: "var(--secondary)", textDecoration: "underline", textDecorationColor: "var(--border)", position: "relative", zIndex: 2 }}
               onClick={(e) => e.stopPropagation()}
             >
