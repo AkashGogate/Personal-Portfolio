@@ -32,11 +32,11 @@ export default function Hero() {
 
         <div style={{ borderTop: "1px solid var(--border)", width: "6rem", margin: "2rem 0" }} />
 
-        <p className="font-body" style={{ fontSize: "1rem", color: "var(--secondary)", lineHeight: 1.75, maxWidth: "36rem", marginBottom: "1rem" }}>
+        <p className="font-body" style={{ fontSize: "1.12rem", color: "var(--secondary)", lineHeight: 1.75, maxWidth: "36rem", marginBottom: "1rem" }}>
           From satellite observation scheduling at Leidos to LLM pipelines for cancer biology.
         </p>
 
-        <p className="font-body" style={{ fontSize: "0.97rem", color: "var(--secondary)", lineHeight: 1.75, maxWidth: "36rem", marginBottom: "1.5rem" }}>
+        <p className="font-body" style={{ fontSize: "1.12rem", color: "var(--secondary)", lineHeight: 1.75, maxWidth: "36rem", marginBottom: "1.5rem" }}>
           CS + Biology at UW-Madison | Computing for biology&apos;s next frontier.
         </p>
 
@@ -47,7 +47,7 @@ export default function Hero() {
             target="_blank"
             rel="noopener noreferrer"
             className="font-body hover-mint"
-            style={{ fontSize: "0.9rem", color: "var(--primary)", textDecoration: "underline", textDecorationColor: "var(--border)" }}
+            style={{ fontSize: "1.12rem", color: "var(--primary)", textDecoration: "underline", textDecorationColor: "var(--border)" }}
           >
             github.com/AkashGogate ↗
           </a>
@@ -57,17 +57,19 @@ export default function Hero() {
           <a
             href="#projects"
             onClick={(e) => { e.preventDefault(); scrollToSection("projects"); }}
-            className="font-body text-sm px-5 py-2.5 btn-outline-primary"
+            className="font-body px-6 py-3 btn-outline-primary"
+            style={{ fontSize: "1.05rem" }}
           >
             View Projects
           </a>
-          <a href={`${BASE}/resumes/resume.pdf`} download="Gogate Akash Resume.pdf" className="font-body text-sm px-5 py-2.5 btn-outline-secondary">
+          <a href={`${BASE}/resumes/resume.pdf`} download="Gogate Akash Resume.pdf" className="font-body px-6 py-3 btn-outline-secondary" style={{ fontSize: "1.05rem" }}>
             Download Resume
           </a>
           <a
             href="#contact"
             onClick={(e) => { e.preventDefault(); scrollToSection("contact"); }}
-            className="font-body text-sm px-5 py-2.5 btn-outline-secondary"
+            className="font-body px-6 py-3 btn-outline-secondary"
+            style={{ fontSize: "1.05rem" }}
           >
             Contact
           </a>
