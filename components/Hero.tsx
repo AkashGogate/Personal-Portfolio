@@ -62,8 +62,8 @@ export default function Hero() {
           >
             View Projects
           </a>
-          <a href={`${BASE}/resumes/resume.pdf`} download="Gogate Akash Resume.pdf" className="font-body px-6 py-3 btn-outline-secondary" style={{ fontSize: "1.05rem" }}>
-            Download Resume
+          <a href={`${BASE}/resume`} target="_blank" rel="noopener noreferrer" className="font-body px-6 py-3 btn-outline-secondary" style={{ fontSize: "1.05rem" }}>
+            View Resume
           </a>
           <a
             href="#contact"

@@ -162,7 +162,7 @@ export default function Nav() {
             </a>
           ))}
           <a
-            href={`${BASE}/resumes/resume.pdf`}
+            href={`${BASE}/resume`}
             target="_blank"
             rel="noopener noreferrer"
             className="font-body hover-mint"
@@ -224,7 +224,7 @@ export default function Nav() {
               </a>
             ))}
             <a
-              href={`${BASE}/resumes/resume.pdf`}
+              href={`${BASE}/resume`}
               target="_blank"
               rel="noopener noreferrer"
               className="font-body hover-mint"
