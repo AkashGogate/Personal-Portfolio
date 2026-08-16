@@ -15,7 +15,7 @@ npm install
 npm run dev
 ```
 
-Open https://personalportfoliowebsite.akashgogate.com to view the site.
+Open https://akashgogate.com to view the site.
 
 ## Scripts
 
