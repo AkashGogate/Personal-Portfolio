@@ -15,7 +15,7 @@ npm install
 npm run dev
 ```
 
-Open https://akashgogate.com to view the site.
+Open https://www.akashgogate.com to view the site.
 
 ## Scripts
 
