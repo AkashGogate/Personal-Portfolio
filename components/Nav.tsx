@@ -11,6 +11,7 @@ const links = [
   { label: "About", href: "about" },
   { label: "Featured Project", href: "featured-project" },
   { label: "Experience", href: "experience" },
+  { label: "Accomplishments", href: "accomplishments" },
   { label: "Projects", href: "projects" },
   { label: "Skills", href: "skills" },
   { label: "Education", href: "education" },
