@@ -32,9 +32,9 @@ export default function Education() {
 
         <div style={{ borderTop: "1px solid var(--border)", marginBottom: "2.5rem" }} />
 
-        <div ref={courseworkRef} className={`scroll-fade ${courseworkVisible ? "visible" : ""} grid grid-cols-1 md:grid-cols-2 md:grid-flow-col md:[grid-template-rows:repeat(2,auto)] gap-x-8 gap-y-8`}>
+        <div ref={courseworkRef} className={`scroll-fade ${courseworkVisible ? "visible" : ""} md:columns-2 md:gap-x-8`}>
           {education.coursework.map((group) => (
-            <div key={group.area}>
+            <div key={group.area} className="break-inside-avoid mb-8 last:mb-0">
               <p className="section-label mb-5" style={{ borderLeft: "2px solid var(--mint)", paddingLeft: "10px" }}>
                 {group.area}
               </p>
