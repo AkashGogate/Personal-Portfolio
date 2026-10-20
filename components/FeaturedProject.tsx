@@ -5,6 +5,7 @@ import SectionLabel from "./SectionLabel";
 import { projects } from "@/data/resume";
 import { isKnownSkill, skillSlug } from "@/lib/skills";
 import { useScrollFade } from "@/lib/useScrollFade";
+import { scrollToSkillCentered } from "@/lib/scrollToSection";
 
 const BASE = process.env.NEXT_PUBLIC_BASEPATH ?? "";
 
@@ -46,7 +47,23 @@ export default function FeaturedProject() {
                   color: "var(--secondary)",
                 };
                 return isKnownSkill(tag) ? (
-                  <a key={tag} href={`#${skillSlug(tag)}`} className="font-body hover-mint" style={badgeStyle}>
+                  <a
+                    key={tag}
+                    href={`#${skillSlug(tag)}`}
+                    className="font-body"
+                    style={{ ...badgeStyle, transition: "color 0.2s ease, border-color 0.2s ease" }}
+                    onClick={(e) => { e.preventDefault(); scrollToSkillCentered(skillSlug(tag)); }}
+                    onMouseEnter={(e) => {
+                      const el = e.currentTarget as HTMLElement;
+                      el.style.color = "var(--mint)";
+                      el.style.borderColor = "var(--mint)";
+                    }}
+                    onMouseLeave={(e) => {
+                      const el = e.currentTarget as HTMLElement;
+                      el.style.color = "var(--secondary)";
+                      el.style.borderColor = "var(--border)";
+                    }}
+                  >
                     {tag}
                   </a>
                 ) : (

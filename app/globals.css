@@ -61,6 +61,14 @@ section[id],
   color: var(--mint);
 }
 
+.hover-mint-box {
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.hover-mint-box:hover {
+  color: var(--mint);
+  border-color: var(--mint);
+}
+
 .btn-outline-primary {
   border: 1px solid var(--primary);
   color: var(--primary);

@@ -5,7 +5,7 @@ import SectionLabel from "./SectionLabel";
 import { experienceSections, type ExperienceItem } from "@/data/resume";
 import { isKnownSkill, skillHref } from "@/lib/skills";
 import { useScrollFade } from "@/lib/useScrollFade";
-import { scrollToSection } from "@/lib/scrollToSection";
+import { scrollToSection, scrollToSkillCentered } from "@/lib/scrollToSection";
 
 const BASE = process.env.NEXT_PUBLIC_BASEPATH ?? "";
 
@@ -50,9 +50,19 @@ function ExperienceCard({ item, sectionLabel }: { item: ExperienceItem; sectionL
                   <a
                     key={tag}
                     href={skillHref(tag)}
-                    className="font-body hover-mint"
-                    style={badgeStyle}
-                    onClick={(e) => { e.preventDefault(); scrollToSection(skillHref(tag).slice(1)); }}
+                    className="font-body"
+                    style={{ ...badgeStyle, transition: "color 0.2s ease, border-color 0.2s ease" }}
+                    onClick={(e) => { e.preventDefault(); scrollToSkillCentered(skillHref(tag).slice(1)); }}
+                    onMouseEnter={(e) => {
+                      const el = e.currentTarget as HTMLElement;
+                      el.style.color = "var(--mint)";
+                      el.style.borderColor = "var(--mint)";
+                    }}
+                    onMouseLeave={(e) => {
+                      const el = e.currentTarget as HTMLElement;
+                      el.style.color = "var(--secondary)";
+                      el.style.borderColor = "var(--border)";
+                    }}
                   >
                     {tag}
                   </a>

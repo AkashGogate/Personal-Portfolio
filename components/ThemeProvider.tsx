@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 
 type Theme = "light" | "dark";
 type Phase = "idle" | "falling" | "rising";
@@ -17,11 +17,12 @@ const DURATION = 550;
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>("dark");
   const [phase, setPhase] = useState<Phase>("idle");
-  const curtainColor = useRef("");
+  const [curtainColor, setCurtainColor] = useState("");
 
   useEffect(() => {
     const saved = localStorage.getItem("theme") as Theme | null;
     const initial: Theme = saved ?? "dark";
+    // oxlint-disable-next-line react/set-state-in-effect -- hydrate persisted theme after mount
     setTheme(initial);
     document.documentElement.classList.toggle("dark", initial === "dark");
   }, []);
@@ -29,7 +30,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const toggle = useCallback(() => {
     if (phase !== "idle") return;
     const next: Theme = theme === "dark" ? "light" : "dark";
-    curtainColor.current = BG[next];
+    setCurtainColor(BG[next]);
     setPhase("falling");
     setTimeout(() => {
       setTheme(next);
@@ -50,7 +51,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
         style={{
           position: "fixed",
           inset: 0,
-          background: curtainColor.current,
+          background: curtainColor,
           transformOrigin: "top",
           transform: phase === "falling" ? "scaleY(1)" : "scaleY(0)",
           transitionProperty: phase !== "idle" ? "transform" : "none",

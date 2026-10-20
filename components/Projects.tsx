@@ -6,7 +6,7 @@ import SectionLabel from "./SectionLabel";
 import { projects, type Project } from "@/data/resume";
 import { isKnownSkill, skillHref } from "@/lib/skills";
 import { useScrollFade } from "@/lib/useScrollFade";
-import { scrollToSection } from "@/lib/scrollToSection";
+import { scrollToSection, scrollToSkillCentered } from "@/lib/scrollToSection";
 
 const BASE = process.env.NEXT_PUBLIC_BASEPATH ?? "";
 const rest = projects.filter((p) => p.id !== "self-improving-agent");
@@ -22,19 +22,20 @@ function TagList({ tags, onBeforeNavigate }: { tags: string[]; onBeforeNavigate?
             {clickable ? (
               <a
                 href={skillHref(tag)}
-                className="hover-mint"
-                style={{ color: "inherit", position: "relative", zIndex: 2 }}
+                style={{ color: "inherit", position: "relative", zIndex: 2, transition: "color 0.2s ease" }}
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
                   const dest = skillHref(tag).slice(1);
                   if (onBeforeNavigate) {
                     onBeforeNavigate();
-                    setTimeout(() => scrollToSection(dest), 360);
+                    setTimeout(() => scrollToSkillCentered(dest), 360);
                   } else {
-                    scrollToSection(dest);
+                    scrollToSkillCentered(dest);
                   }
                 }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "var(--mint)"; }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "inherit"; }}
               >
                 {tag}
               </a>
@@ -70,12 +71,17 @@ function ProjectDrawer({ project, onClose }: { project: Project; onClose: () => 
       e.preventDefault();
       handleClose();
     };
+    const onBackdropClick = (e: MouseEvent) => {
+      if (e.target === dialog) handleClose();
+    };
+    dialog.addEventListener("click", onBackdropClick);
     dialog.addEventListener("cancel", onCancel);
     dialog.addEventListener("close", onClose);
 
     return () => {
       cancelAnimationFrame(raf);
       document.body.style.overflow = prevOverflow;
+      dialog.removeEventListener("click", onBackdropClick);
       dialog.removeEventListener("cancel", onCancel);
       dialog.removeEventListener("close", onClose);
     };
@@ -87,7 +93,6 @@ function ProjectDrawer({ project, onClose }: { project: Project; onClose: () => 
       ref={dialogRef}
       aria-labelledby="project-drawer-title"
       className="project-drawer-dialog"
-      onClick={(e) => { if (e.target === dialogRef.current) handleClose(); }}
     >
       <div
         className="project-drawer w-full max-h-[80vh] overflow-y-auto"
